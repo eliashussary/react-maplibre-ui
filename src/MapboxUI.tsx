@@ -95,6 +95,7 @@ export const MapboxUI: React.FC<MapboxUIProps> = props => {
   } = props;
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const [mapInstance, setMapInstance] = useState<MapboxGL.Map | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -106,7 +107,12 @@ export const MapboxUI: React.FC<MapboxUIProps> = props => {
       zoom: defaultZoom,
     });
 
+    const onLoad = () => setIsLoaded(true);
+    map.on("load", onLoad);
     setMapInstance(map);
+    return () => {
+      map.on("load", onLoad);
+    };
   }, [mapContainer.current]);
 
   useEffect(() => {
@@ -128,7 +134,7 @@ export const MapboxUI: React.FC<MapboxUIProps> = props => {
           style={style}
           ref={ref => (mapContainer.current = ref)}
         />
-        {children}
+        {isLoaded && children}
       </MapCtx.Provider>
     </React.Fragment>
   );
