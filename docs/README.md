@@ -16,13 +16,16 @@ npm i react-mapbox-ui
 
 ## Usage
 
+See [TypeDocs](/docs/modules.md).
+
 Composing your own MapboxUI components.
 
 ```tsx
-import { MapboxUI, useMapboxUI, useMapboxUIEffect } from 'react-mapbox-ui';
-import 'mapbox-gl/dist/mapbox-gl.css';
+// ./examples/Marker.tsx
+import { MapboxUI, useMapboxUIEffect } from "react-mapbox-ui";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-const accessToken = 'your access token';
+const accessToken = "your access token";
 
 const centerCoorindates: LngLatLike = [-79.347015, 43.65107]; // Toronto
 
@@ -54,8 +57,8 @@ const App = () => {
     <MapboxUI
       accessToken={accessToken}
       style={{
-        height: '100vh',
-        width: '100%',
+        height: "100vh",
+        width: "100%",
       }}
       defaultCenter={centerCoorindates}
     >

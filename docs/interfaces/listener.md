@@ -24,7 +24,7 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: MapboxUI.tsx:14
+Defined in: [MapboxUI.tsx:14](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/MapboxUI.tsx#L14)
 
 ▸ **Listener**(`listener`: (`ev`: *any*) => *void*): *void*
 
@@ -36,4 +36,4 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: MapboxUI.tsx:15
+Defined in: [MapboxUI.tsx:15](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/MapboxUI.tsx#L15)

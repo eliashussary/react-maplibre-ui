@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build && build:docs",
+    "build": "tsdx build && yarn build:docs",
     "build:docs": "yarn typedoc --plugin typedoc-plugin-markdown",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",

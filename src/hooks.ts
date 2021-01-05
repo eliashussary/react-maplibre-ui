@@ -12,9 +12,10 @@ import { MapboxUICtx, MapCtx } from "./MapboxUI";
  */
 export const useMapboxUI = () => useContext(MapCtx);
 
-type MapboxUIEffectCallback = (
-  mapCtx: Required<MapboxUICtx>
-) => void | (() => void);
+type NonNullCtx = {
+  [P in keyof MapboxUICtx]: Exclude<MapboxUICtx[P], null>;
+};
+type MapboxUIEffectCallback = (mapCtx: NonNullCtx) => void | (() => void);
 
 /**
  * useMapboxUIEffect wraps useMapboxUI in a useEffect
@@ -41,7 +42,7 @@ export const useMapboxUIEffect = (
   const { map, mapbox } = useMapboxUI();
   useEffect(() => {
     if (!map || !mapbox) return;
-    const rt = effect({ map, mapbox });
+    const rt = effect({ map: map, mapbox: mapbox });
     return rt;
   }, [map, mapbox, ...deps]);
 };

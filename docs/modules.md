@@ -16,6 +16,8 @@
 
 ### Variables
 
+* [DEFAULT\_MAP\_STYLE](modules.md#default_map_style)
+* [DEFAULT\_MAP\_ZOOM](modules.md#default_map_zoom)
 * [MapCtx](modules.md#mapctx)
 * [MapboxUI](modules.md#mapboxui)
 
@@ -30,7 +32,7 @@
 
 Ƭ **ListenerMap**: *Partial*<{ [T in keyof MapEventType]: Listener<T\>}\>
 
-Defined in: MapboxUI.tsx:19
+Defined in: [MapboxUI.tsx:19](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/MapboxUI.tsx#L19)
 
 ___
 
@@ -45,7 +47,7 @@ Name | Type |
 `map` | MapboxGL.Map \| *null* |
 `mapbox` | *typeof* MapboxGL \| *null* |
 
-Defined in: MapboxUI.tsx:4
+Defined in: [MapboxUI.tsx:4](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/MapboxUI.tsx#L4)
 
 ___
 
@@ -67,15 +69,31 @@ Name | Type | Description |
 `once?` | [*ListenerMap*](modules.md#listenermap) | once MapEvent listeners, see https://docs.mapbox.com/mapbox-gl-js/api/events/   |
 `style?` | React.CSSProperties | container style css properties   |
 
-Defined in: MapboxUI.tsx:25
+Defined in: [MapboxUI.tsx:25](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/MapboxUI.tsx#L25)
 
 ## Variables
+
+### DEFAULT\_MAP\_STYLE
+
+• `Const` **DEFAULT\_MAP\_STYLE**: *mapbox://styles/mapbox/light-v10*= "mapbox://styles/mapbox/light-v10"
+
+Defined in: [MapboxUI.tsx:80](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/MapboxUI.tsx#L80)
+
+___
+
+### DEFAULT\_MAP\_ZOOM
+
+• `Const` **DEFAULT\_MAP\_ZOOM**: *10*= 10
+
+Defined in: [MapboxUI.tsx:81](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/MapboxUI.tsx#L81)
+
+___
 
 ### MapCtx
 
 • `Const` **MapCtx**: *Context*<[*MapboxUICtx*](modules.md#mapboxuictx)\>
 
-Defined in: MapboxUI.tsx:9
+Defined in: [MapboxUI.tsx:9](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/MapboxUI.tsx#L9)
 
 ___
 
@@ -83,7 +101,7 @@ ___
 
 • `Const` **MapboxUI**: *React.FC*<[*MapboxUIProps*](modules.md#mapboxuiprops)\>
 
-Defined in: MapboxUI.tsx:80
+Defined in: [MapboxUI.tsx:83](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/MapboxUI.tsx#L83)
 
 ## Functions
 
@@ -102,7 +120,7 @@ const { map,mapbox } = useMapboxUI()
 
 **Returns:** [*MapboxUICtx*](modules.md#mapboxuictx)
 
-Defined in: hooks.ts:13
+Defined in: [hooks.ts:13](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/hooks.ts#L13)
 
 ___
 
@@ -137,4 +155,4 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: hooks.ts:37
+Defined in: [hooks.ts:38](https://github.com/eliashussary/react-mapbox-ui/blob/34bebe9/src/hooks.ts#L38)
