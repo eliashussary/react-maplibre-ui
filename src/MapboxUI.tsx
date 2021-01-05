@@ -77,13 +77,16 @@ function registerEventListeners(
   };
 }
 
+export const DEFAULT_MAP_STYLE = "mapbox://styles/mapbox/light-v10";
+export const DEFAULT_MAP_ZOOM = 10;
+
 export const MapboxUI: React.FC<MapboxUIProps> = props => {
   const {
     accessToken,
-    mapStyle = "mapbox://styles/mapbox/light-v10",
+    mapStyle = DEFAULT_MAP_STYLE,
     children,
     defaultCenter,
-    defaultZoom = 10,
+    defaultZoom = DEFAULT_MAP_ZOOM,
     style,
     className,
     id,
