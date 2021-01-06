@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
 import {
-  MapboxUI,
+  Map,
   DEFAULT_MAP_STYLE,
   DEFAULT_MAP_ZOOM,
   useMapboxUI,
@@ -14,6 +14,7 @@ const mockConstructor = jest.fn();
 const mockSetLngLat = jest.fn();
 const mockAddToMap = jest.fn();
 const mockRemove = jest.fn();
+const mockOnListener = jest.fn();
 
 jest.mock("mapbox-gl", () => {
   return {
@@ -21,6 +22,10 @@ jest.mock("mapbox-gl", () => {
       constructor(opts: any) {
         mockConstructor(opts);
         return this;
+      }
+      on(type: string, cb: Function) {
+        mockOnListener(type, cb);
+        cb();
       }
     },
     Marker: class {
@@ -54,7 +59,7 @@ describe("MapboxUI", () => {
   it("renders component", () => {
     act(() => {
       ReactDOM.render(
-        <MapboxUI accessToken={mockAccessToken} defaultCenter={mockCenter} />,
+        <Map accessToken={mockAccessToken} defaultCenter={mockCenter} />,
         container
       );
     });
@@ -81,9 +86,9 @@ describe("MapboxUI", () => {
     };
     act(() => {
       ReactDOM.render(
-        <MapboxUI accessToken={mockAccessToken} defaultCenter={mockCenter}>
+        <Map accessToken={mockAccessToken} defaultCenter={mockCenter}>
           <MockComponent />
-        </MapboxUI>,
+        </Map>,
         container
       );
     });
@@ -116,9 +121,9 @@ describe("MapboxUI", () => {
     };
     act(() => {
       ReactDOM.render(
-        <MapboxUI accessToken={mockAccessToken} defaultCenter={mockCenter}>
+        <Map accessToken={mockAccessToken} defaultCenter={mockCenter}>
           <Marker coordinates={mockCenter} />
-        </MapboxUI>,
+        </Map>,
         container
       );
     });
