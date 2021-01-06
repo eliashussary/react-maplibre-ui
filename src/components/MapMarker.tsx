@@ -1,4 +1,5 @@
 import React, { useRef, useMemo } from "react";
+import ReactDOM from "react-dom";
 import MapboxGL, { LngLatLike } from "mapbox-gl";
 import { useMapboxUIEffect } from "../hooks";
 import { OnMapEventHandlers } from "../types";
@@ -21,8 +22,14 @@ export const MapMarker: React.FC<MapMarkerProps> = props => {
   useMapboxUIEffect(
     ({ map, mapbox }) => {
       const markerOptions = { ...rest };
-      if (children && el.current) {
+
+      if (children) {
+        el.current = document.createElement("div");
         markerOptions.element = el.current;
+        ReactDOM.render(
+          <React.Fragment>{children}</React.Fragment>,
+          el.current
+        );
       }
       const marker = new mapbox.Marker(markerOptions)
         .setLngLat(lngLat)
@@ -51,17 +58,14 @@ export const MapMarker: React.FC<MapMarkerProps> = props => {
       onListeners.addListeners();
       onceListeners.addListeners();
       return () => {
+        ReactDOM.unmountComponentAtNode(marker.getElement());
         onListeners.removeListeners();
         onceListeners.removeListeners();
         marker.remove();
       };
     },
-    [lngLat, el, children]
+    [lngLat, children]
   );
-
-  if (children) {
-    return <div ref={ref => (el.current = ref)}>{children}</div>;
-  }
 
   return null;
 };
