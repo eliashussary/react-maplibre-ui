@@ -31,7 +31,7 @@
 
 Ƭ **MapLayerProps**: AnyLayer & *Partial*<*OnLayerEventHandlers*<AnyLayer\>\> & { `onLoad?`: *MapboxLayerEventHandler*<AnyLayer, *any*\>  }
 
-Defined in: components/MapLayer.tsx:9
+Defined in: [components/MapLayer.tsx:9](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/components/MapLayer.tsx#L9)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 Ƭ **MapboxUIProps**: *Partial*<*OnMapEventHandlers*<BaseMapboxUIProps\>\> & BaseMapboxUIProps
 
-Defined in: components/Map.tsx:40
+Defined in: [components/Map.tsx:40](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/components/Map.tsx#L40)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 Ƭ **SourceProps**: AnySourceData & { `id`: *string* ; `onLoad?`: *MapboxLayerEventHandler*<[*SourceProps*](modules.md#sourceprops), *any*\>  }
 
-Defined in: components/MapSource.tsx:6
+Defined in: [components/MapSource.tsx:6](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/components/MapSource.tsx#L6)
 
 ## Variables
 
@@ -55,7 +55,7 @@ Defined in: components/MapSource.tsx:6
 
 • `Const` **DEFAULT\_MAP\_STYLE**: *mapbox://styles/mapbox/light-v10*= "mapbox://styles/mapbox/light-v10"
 
-Defined in: components/Map.tsx:43
+Defined in: [components/Map.tsx:43](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/components/Map.tsx#L43)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 • `Const` **DEFAULT\_MAP\_ZOOM**: *10*= 10
 
-Defined in: components/Map.tsx:44
+Defined in: [components/Map.tsx:44](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/components/Map.tsx#L44)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 • `Const` **Map**: *React.FC*<[*MapboxUIProps*](modules.md#mapboxuiprops)\>
 
-Defined in: components/Map.tsx:46
+Defined in: [components/Map.tsx:46](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/components/Map.tsx#L46)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 • `Const` **MapCtx**: *Context*<MapboxUICtx\>
 
-Defined in: components/Map.tsx:7
+Defined in: [components/Map.tsx:7](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/components/Map.tsx#L7)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 • `Const` **MapLayer**: *React.FC*<[*MapLayerProps*](modules.md#maplayerprops)\>
 
-Defined in: components/MapLayer.tsx:14
+Defined in: [components/MapLayer.tsx:14](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/components/MapLayer.tsx#L14)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 • `Const` **MapMarker**: *React.FC*<MapMarkerProps\>
 
-Defined in: components/MapMarker.tsx:15
+Defined in: [components/MapMarker.tsx:16](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/components/MapMarker.tsx#L16)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 • `Const` **MapSource**: *React.FC*<[*SourceProps*](modules.md#sourceprops)\>
 
-Defined in: components/MapSource.tsx:11
+Defined in: [components/MapSource.tsx:11](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/components/MapSource.tsx#L11)
 
 ## Functions
 
@@ -122,7 +122,7 @@ const { map,mapbox } = useMapboxUI()
 
 **Returns:** MapboxUICtx
 
-Defined in: [hooks.ts:14](https://github.com/eliashussary/react-mapbox-ui/blob/1db1bc5/src/hooks.ts#L14)
+Defined in: [hooks.ts:14](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/hooks.ts#L14)
 
 ___
 
@@ -157,4 +157,4 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [hooks.ts:38](https://github.com/eliashussary/react-mapbox-ui/blob/1db1bc5/src/hooks.ts#L38)
+Defined in: [hooks.ts:38](https://github.com/eliashussary/react-mapbox-ui/blob/3326376/src/hooks.ts#L38)
