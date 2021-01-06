@@ -1,28 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import MapboxGL, { MapEventType, EventData, LngLatLike } from "mapbox-gl";
-
-export type MapboxUICtx = {
-  mapbox: typeof MapboxGL | null;
-  map: MapboxGL.Map | null;
-};
+import React, { useEffect, useRef, useState, useMemo } from "react";
+import MapboxGL, { LngLatLike } from "mapbox-gl";
+import { MapboxUICtx, OnMapEventHandlers } from "../types";
+import { pickHandlers } from "../util/pickHandlers";
+import { createListeners } from "../util/createListeners";
 
 export const MapCtx = React.createContext<MapboxUICtx>({
   map: null,
   mapbox: MapboxGL,
 });
 
-export interface Listener<T extends keyof MapEventType = any> {
-  (listener: (ev: MapEventType[T] & EventData) => void): void;
-  (listener: (ev: any) => void): void;
-}
-
-export type ListenerMap = Partial<
-  {
-    [T in keyof MapEventType]: Listener<T>;
-  }
->;
-
-export type MapboxUIProps = {
+type BaseMapboxUIProps = {
   /**
    * accessToken from mapbox, see https://docs.mapbox.com/help/how-mapbox-works/access-tokens/
    */
@@ -48,39 +35,15 @@ export type MapboxUIProps = {
    * container div#id tag
    */
   id?: string;
-  /**
-   * on MapEvent listeners, see https://docs.mapbox.com/mapbox-gl-js/api/events/
-   */
-  on?: ListenerMap;
-  /**
-   * once MapEvent listeners, see https://docs.mapbox.com/mapbox-gl-js/api/events/
-   */
-  once?: ListenerMap;
 };
 
-function registerEventListeners(
-  map: MapboxGL.Map | null,
-  listeners: ListenerMap | undefined,
-  listenerType: "on" | "once" = "on"
-) {
-  if (!map || !listeners) return;
-
-  const offListeners: (() => void)[] = [];
-  for (const eventListener of Object.entries(listeners)) {
-    const [type, listener] = eventListener as [string, Listener];
-    map[listenerType](type, listener);
-    offListeners.push(() => map.off(type, listener));
-  }
-
-  return () => {
-    offListeners.forEach(fn => fn());
-  };
-}
+export type MapboxUIProps = Partial<OnMapEventHandlers<BaseMapboxUIProps>> &
+  BaseMapboxUIProps;
 
 export const DEFAULT_MAP_STYLE = "mapbox://styles/mapbox/light-v10";
 export const DEFAULT_MAP_ZOOM = 10;
 
-export const MapboxUI: React.FC<MapboxUIProps> = props => {
+export const Map: React.FC<MapboxUIProps> = props => {
   const {
     accessToken,
     mapStyle = DEFAULT_MAP_STYLE,
@@ -90,12 +53,13 @@ export const MapboxUI: React.FC<MapboxUIProps> = props => {
     style,
     className,
     id,
-    on,
-    once,
+    ...rest
   } = props;
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const [mapInstance, setMapInstance] = useState<MapboxGL.Map | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const [onHandlers, onceHandlers] = useMemo(() => pickHandlers(rest), [rest]);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -107,23 +71,37 @@ export const MapboxUI: React.FC<MapboxUIProps> = props => {
       zoom: defaultZoom,
     });
 
+    const onListeners = createListeners(
+      props,
+      onHandlers,
+      {
+        map,
+        mapbox: MapboxGL,
+      },
+      "on"
+    );
+
+    const onceListeners = createListeners(
+      props,
+      onceHandlers,
+      {
+        map,
+        mapbox: MapboxGL,
+      },
+      "once"
+    );
+
+    onListeners.addListeners();
+    onceListeners.addListeners();
     const onLoad = () => setIsLoaded(true);
     map.on("load", onLoad);
     setMapInstance(map);
     return () => {
+      onListeners.removeListeners();
+      onceListeners.removeListeners();
       map.on("load", onLoad);
     };
   }, [mapContainer.current]);
-
-  useEffect(() => {
-    const cleanup = registerEventListeners(mapInstance, on, "on");
-    return cleanup;
-  }, [mapInstance, on]);
-
-  useEffect(() => {
-    const cleanup = registerEventListeners(mapInstance, once, "once");
-    return cleanup;
-  }, [mapInstance, once]);
 
   return (
     <React.Fragment>

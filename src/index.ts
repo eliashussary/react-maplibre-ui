@@ -1,2 +1,2 @@
-export * from "./MapboxUI";
+export * from "./components";
 export * from "./hooks";

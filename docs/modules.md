@@ -4,22 +4,21 @@
 
 ## Index
 
-### Interfaces
-
-* [Listener](interfaces/listener.md)
-
 ### Type aliases
 
-* [ListenerMap](modules.md#listenermap)
-* [MapboxUICtx](modules.md#mapboxuictx)
+* [MapLayerProps](modules.md#maplayerprops)
 * [MapboxUIProps](modules.md#mapboxuiprops)
+* [SourceProps](modules.md#sourceprops)
 
 ### Variables
 
 * [DEFAULT\_MAP\_STYLE](modules.md#default_map_style)
 * [DEFAULT\_MAP\_ZOOM](modules.md#default_map_zoom)
+* [Map](modules.md#map)
 * [MapCtx](modules.md#mapctx)
-* [MapboxUI](modules.md#mapboxui)
+* [MapLayer](modules.md#maplayer)
+* [MapMarker](modules.md#mapmarker)
+* [MapSource](modules.md#mapsource)
 
 ### Functions
 
@@ -28,48 +27,27 @@
 
 ## Type aliases
 
-### ListenerMap
+### MapLayerProps
 
-Ƭ **ListenerMap**: *Partial*<{ [T in keyof MapEventType]: Listener<T\>}\>
+Ƭ **MapLayerProps**: AnyLayer & *Partial*<*OnLayerEventHandlers*<AnyLayer\>\> & { `onLoad?`: *MapboxLayerEventHandler*<AnyLayer, *any*\>  }
 
-Defined in: [MapboxUI.tsx:19](https://github.com/eliashussary/react-mapbox-ui/blob/d45e5ae/src/MapboxUI.tsx#L19)
-
-___
-
-### MapboxUICtx
-
-Ƭ **MapboxUICtx**: { `map`: MapboxGL.Map \| *null* ; `mapbox`: *typeof* MapboxGL \| *null*  }
-
-#### Type declaration:
-
-Name | Type |
------- | ------ |
-`map` | MapboxGL.Map \| *null* |
-`mapbox` | *typeof* MapboxGL \| *null* |
-
-Defined in: [MapboxUI.tsx:4](https://github.com/eliashussary/react-mapbox-ui/blob/d45e5ae/src/MapboxUI.tsx#L4)
+Defined in: components/MapLayer.tsx:9
 
 ___
 
 ### MapboxUIProps
 
-Ƭ **MapboxUIProps**: { `accessToken`: *string* ; `className?`: *string* ; `defaultCenter`: LngLatLike ; `defaultZoom?`: *number* ; `id?`: *string* ; `mapStyle?`: *string* ; `on?`: [*ListenerMap*](modules.md#listenermap) ; `once?`: [*ListenerMap*](modules.md#listenermap) ; `style?`: React.CSSProperties  }
+Ƭ **MapboxUIProps**: *Partial*<*OnMapEventHandlers*<BaseMapboxUIProps\>\> & BaseMapboxUIProps
 
-#### Type declaration:
+Defined in: components/Map.tsx:40
 
-Name | Type | Description |
------- | ------ | ------ |
-`accessToken` | *string* | accessToken from mapbox, see https://docs.mapbox.com/help/how-mapbox-works/access-tokens/   |
-`className?` | *string* | container css className   |
-`defaultCenter` | LngLatLike | defaultCenter as [longitude, latitude]   |
-`defaultZoom?` | *number* | - |
-`id?` | *string* | container div#id tag   |
-`mapStyle?` | *string* | mapbox styleUrl, see https://docs.mapbox.com/help/glossary/style-url/   |
-`on?` | [*ListenerMap*](modules.md#listenermap) | on MapEvent listeners, see https://docs.mapbox.com/mapbox-gl-js/api/events/   |
-`once?` | [*ListenerMap*](modules.md#listenermap) | once MapEvent listeners, see https://docs.mapbox.com/mapbox-gl-js/api/events/   |
-`style?` | React.CSSProperties | container style css properties   |
+___
 
-Defined in: [MapboxUI.tsx:25](https://github.com/eliashussary/react-mapbox-ui/blob/d45e5ae/src/MapboxUI.tsx#L25)
+### SourceProps
+
+Ƭ **SourceProps**: AnySourceData & { `id`: *string* ; `onLoad?`: *MapboxLayerEventHandler*<[*SourceProps*](modules.md#sourceprops), *any*\>  }
+
+Defined in: components/MapSource.tsx:6
 
 ## Variables
 
@@ -77,7 +55,7 @@ Defined in: [MapboxUI.tsx:25](https://github.com/eliashussary/react-mapbox-ui/bl
 
 • `Const` **DEFAULT\_MAP\_STYLE**: *mapbox://styles/mapbox/light-v10*= "mapbox://styles/mapbox/light-v10"
 
-Defined in: [MapboxUI.tsx:80](https://github.com/eliashussary/react-mapbox-ui/blob/d45e5ae/src/MapboxUI.tsx#L80)
+Defined in: components/Map.tsx:43
 
 ___
 
@@ -85,29 +63,53 @@ ___
 
 • `Const` **DEFAULT\_MAP\_ZOOM**: *10*= 10
 
-Defined in: [MapboxUI.tsx:81](https://github.com/eliashussary/react-mapbox-ui/blob/d45e5ae/src/MapboxUI.tsx#L81)
+Defined in: components/Map.tsx:44
+
+___
+
+### Map
+
+• `Const` **Map**: *React.FC*<[*MapboxUIProps*](modules.md#mapboxuiprops)\>
+
+Defined in: components/Map.tsx:46
 
 ___
 
 ### MapCtx
 
-• `Const` **MapCtx**: *Context*<[*MapboxUICtx*](modules.md#mapboxuictx)\>
+• `Const` **MapCtx**: *Context*<MapboxUICtx\>
 
-Defined in: [MapboxUI.tsx:9](https://github.com/eliashussary/react-mapbox-ui/blob/d45e5ae/src/MapboxUI.tsx#L9)
+Defined in: components/Map.tsx:7
 
 ___
 
-### MapboxUI
+### MapLayer
 
-• `Const` **MapboxUI**: *React.FC*<[*MapboxUIProps*](modules.md#mapboxuiprops)\>
+• `Const` **MapLayer**: *React.FC*<[*MapLayerProps*](modules.md#maplayerprops)\>
 
-Defined in: [MapboxUI.tsx:83](https://github.com/eliashussary/react-mapbox-ui/blob/d45e5ae/src/MapboxUI.tsx#L83)
+Defined in: components/MapLayer.tsx:14
+
+___
+
+### MapMarker
+
+• `Const` **MapMarker**: *React.FC*<MapMarkerProps\>
+
+Defined in: components/MapMarker.tsx:15
+
+___
+
+### MapSource
+
+• `Const` **MapSource**: *React.FC*<[*SourceProps*](modules.md#sourceprops)\>
+
+Defined in: components/MapSource.tsx:11
 
 ## Functions
 
 ### useMapboxUI
 
-▸ `Const`**useMapboxUI**(): [*MapboxUICtx*](modules.md#mapboxuictx)
+▸ `Const`**useMapboxUI**(): MapboxUICtx
 
 useMapboxUI is a simple wrapper around `useContext(MapCtx)`
 it provides the Map instance and mapbox module
@@ -118,9 +120,9 @@ this hook does not ensure the context proivde was mounted
 const { map,mapbox } = useMapboxUI()
 ```
 
-**Returns:** [*MapboxUICtx*](modules.md#mapboxuictx)
+**Returns:** MapboxUICtx
 
-Defined in: [hooks.ts:13](https://github.com/eliashussary/react-mapbox-ui/blob/d45e5ae/src/hooks.ts#L13)
+Defined in: [hooks.ts:14](https://github.com/eliashussary/react-mapbox-ui/blob/1db1bc5/src/hooks.ts#L14)
 
 ___
 
@@ -155,4 +157,4 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [hooks.ts:38](https://github.com/eliashussary/react-mapbox-ui/blob/d45e5ae/src/hooks.ts#L38)
+Defined in: [hooks.ts:38](https://github.com/eliashussary/react-mapbox-ui/blob/1db1bc5/src/hooks.ts#L38)

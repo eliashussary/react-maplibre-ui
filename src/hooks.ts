@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
-import { MapboxUICtx, MapCtx } from "./MapboxUI";
+import { MapCtx } from "./components/Map";
+import { NonNullMapboxUICtx } from "./types";
 
 /**
  * useMapboxUI is a simple wrapper around `useContext(MapCtx)`
@@ -12,9 +13,6 @@ import { MapboxUICtx, MapCtx } from "./MapboxUI";
  */
 export const useMapboxUI = () => useContext(MapCtx);
 
-export type NonNullMapboxUICtx = {
-  [P in keyof MapboxUICtx]: Exclude<MapboxUICtx[P], null>;
-};
 type MapboxUIEffectCallback = (
   mapCtx: NonNullMapboxUICtx
 ) => void | (() => void);
