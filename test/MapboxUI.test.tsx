@@ -132,4 +132,8 @@ describe("MapboxUI", () => {
     expect(mockAddToMap).toBeCalledWith(mapCtx);
     expect(mockRemove).toHaveBeenCalled();
   });
+
+  it.todo("test for MapMarker");
+  it.todo("test for MapLayer");
+  it.todo("test for MapSource");
 });
