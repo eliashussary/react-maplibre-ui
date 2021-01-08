@@ -35,25 +35,18 @@ export const MapMarker: React.FC<MapMarkerProps> = props => {
         .setLngLat(lngLat)
         .addTo(map);
 
-      const onListeners = createListeners(
+      const listenerCtx = {
         props,
-        onHandlers,
-        {
-          map,
-          mapbox: MapboxGL,
-        },
-        "on"
-      );
+        map,
+        mapbox,
+      };
+      const onListeners = createListeners(onHandlers, marker, listenerCtx, {
+        listenType: "on",
+      });
 
-      const onceListeners = createListeners(
-        props,
-        onceHandlers,
-        {
-          map,
-          mapbox: MapboxGL,
-        },
-        "once"
-      );
+      const onceListeners = createListeners(onceHandlers, marker, listenerCtx, {
+        listenType: "once",
+      });
 
       onListeners.addListeners();
       onceListeners.addListeners();

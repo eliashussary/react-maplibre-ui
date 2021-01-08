@@ -71,25 +71,19 @@ export const Map: React.FC<MapboxUIProps> = props => {
       zoom: defaultZoom,
     });
 
-    const onListeners = createListeners(
+    const listenerCtx = {
       props,
-      onHandlers,
-      {
-        map,
-        mapbox: MapboxGL,
-      },
-      "on"
-    );
+      map,
+      mapbox: MapboxGL,
+    };
 
-    const onceListeners = createListeners(
-      props,
-      onceHandlers,
-      {
-        map,
-        mapbox: MapboxGL,
-      },
-      "once"
-    );
+    const onListeners = createListeners(onHandlers, map, listenerCtx, {
+      listenType: "on",
+    });
+
+    const onceListeners = createListeners(onceHandlers, map, listenerCtx, {
+      listenType: "once",
+    });
 
     onListeners.addListeners();
     onceListeners.addListeners();

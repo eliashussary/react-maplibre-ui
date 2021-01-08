@@ -11,20 +11,21 @@ export type MapboxUICtx = {
 };
 
 
+export type EventHandlerContext<P> = NonNullMapboxUICtx & {
+  props: P
+}
 
 export type LayerEvents = keyof MapLayerEventType;
 export type MapboxLayerEventHandlerRaw<T extends LayerEvents> = ( evt?: MapLayerEventType[T] & EventData) => void
 export type MapboxLayerEventHandler<P, T extends LayerEvents> = (
-  props: P,
-  ctx: NonNullMapboxUICtx,
+  ctx: EventHandlerContext<P>,
   evt?: MapLayerEventType[T] & EventData
 ) => void;
 
 export type MapEvents = keyof MapEventType;
 export type MapboxEventHandlerRaw<T extends MapEvents> = ( evt?: MapEventType[T] & EventData) => void
 export type MapboxEventHandler<P, T extends MapEvents> = (
-  props: P,
-  ctx: NonNullMapboxUICtx,
+  ctx: EventHandlerContext<P>,
   evt?: MapEventType[T] & EventData
 ) => void;
 
@@ -51,7 +52,6 @@ export type OnMapEventHandlers<P> = {
 export type OnEventListener<P> = OnMapEventHandlers<P> | OnLayerEventHandlers<P> 
 export type OnEventHandlerRaw = MapboxEventHandlerRaw<any> | MapboxLayerEventHandlerRaw<any>
 export type OnEventHandler<P> = (
-  props: P,
-  ctx: NonNullMapboxUICtx,
+  ctx: EventHandlerContext<P>,
   evt?:any
 ) => void;

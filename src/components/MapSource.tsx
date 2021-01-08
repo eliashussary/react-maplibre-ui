@@ -11,12 +11,16 @@ export type SourceProps = AnySourceData & {
 export const MapSource: React.FC<SourceProps> = props => {
   const { id, onLoad, children = null, ...source } = props;
 
+  // possible source attributes we need to track
+  // https://docs.mapbox.com/mapbox-gl-js/style-spec/sources/
+  // @ts-ignore
+  const { type, data, tiles, url, urls, coordinates } = source;
   useMapboxUIEffect(
     ({ map, mapbox }) => {
       map.addSource(id, source);
 
       if (onLoad) {
-        onLoad(props, { map, mapbox });
+        onLoad({ map, mapbox, props });
       }
 
       return () => {
@@ -29,7 +33,7 @@ export const MapSource: React.FC<SourceProps> = props => {
         map.removeSource(id);
       };
     },
-    [id, onLoad, source]
+    [id, onLoad, type, data, tiles, url, urls, coordinates]
   );
 
   if (!children) return null;

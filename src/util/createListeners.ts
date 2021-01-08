@@ -1,29 +1,36 @@
 import {
-  NonNullMapboxUICtx,
   OnEventListener,
   LayerEvents,
   OnEventHandlerRaw,
   OnEventHandler,
+  EventHandlerContext,
 } from "../types";
 
+interface ListenerOptions {
+  listenType: "on" | "once";
+  layerId?: string;
+}
+
 export function createListeners<P>(
-  props: P,
   onHandlers: OnEventListener<P>,
-  mapCtx: NonNullMapboxUICtx,
-  onOrOnce: "on" | "once" = "on",
-  layerId?: string
+  target: mapboxgl.Map | mapboxgl.Marker,
+  ctx: EventHandlerContext<P>,
+  opts: ListenerOptions = { listenType: "on" }
 ) {
-  const { map } = mapCtx;
   const handlers = [] as [LayerEvents, OnEventHandlerRaw][];
 
+  const { listenType, layerId } = opts;
+
   for (const handlerType in onHandlers) {
-    const type = handlerType.replace(onOrOnce, "").toLowerCase() as LayerEvents;
+    const type = handlerType
+      .replace(listenType, "")
+      .toLowerCase() as LayerEvents;
 
     const handler: OnEventHandlerRaw = ev => {
       // @ts-ignore
       const customHandler = onHandlers[handlerType] as OnEventHandler<any>;
 
-      return customHandler(props, mapCtx, ev);
+      return customHandler(ctx, ev);
     };
 
     handlers.push([type, handler]);
@@ -31,19 +38,23 @@ export function createListeners<P>(
 
   const addListeners = () => {
     handlers.forEach(([type, handler]) => {
-      if (layerId) {
-        return map[onOrOnce](type, layerId, handler);
+      if (opts.layerId) {
+        return (target as mapboxgl.Map)[listenType](
+          type,
+          opts.layerId,
+          handler
+        );
       }
-      return map[onOrOnce](type, handler);
+      return target[listenType](type, handler);
     });
   };
 
   const removeListeners = () => {
     handlers.forEach(([type, handler]) => {
       if (layerId) {
-        return map.off(type, layerId, handler);
+        return (target as mapboxgl.Map).off(type, layerId, handler);
       }
-      return map.off(type, handler);
+      return target.off(type, handler);
     });
   };
 

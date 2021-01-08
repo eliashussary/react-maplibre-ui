@@ -3,8 +3,10 @@ import { Meta } from "@storybook/react";
 import { Map, MapMarker, MapLayer, MapSource } from "../src";
 import { LngLatLike } from "mapbox-gl";
 import bbox from "@turf/bbox";
-import geoJson from "./geojson.json";
+import geoJson from "./geo.json";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { useCallback, useState } from "@storybook/addons";
+import debounce from "lodash/debounce";
 
 const accesToken = process.env.MAPBOX_ACCESS_TOKEN;
 
@@ -51,7 +53,7 @@ export const WithMarker = () => {
   );
 };
 
-const zoomToBounds = (geojson: GeoJSON.Feature) => (props, { map }) => {
+const zoomToBounds = (geojson: GeoJSON.Feature) => ({ map }) => {
   const [minLng, minLat, maxLng, maxLat] = bbox(geojson);
   map.fitBounds([
     [minLng, maxLat],
@@ -59,36 +61,63 @@ const zoomToBounds = (geojson: GeoJSON.Feature) => (props, { map }) => {
   ]);
 };
 export const WithGeoJson = () => {
-  const id = "area";
+  const [currentGeoIdx, setCurrentGeoIdx] = useState(0);
+  const [moveState, setMoveState] = useState(null);
+  const handleMove = useCallback(
+    debounce((ctx, ev) => {
+      console.log(ev);
+      setMoveState(ev);
+    }, 500),
+    [setMoveState]
+  );
+
+  const id = "id" + currentGeoIdx;
   return (
-    <Map
-      accessToken={accesToken}
-      style={{
-        height: "calc(100vh - 35px)",
-        width: "100%",
-      }}
-      defaultCenter={centerCoorindates}
-      onMove={(...args) => console.log("onMove", args)}
-      onceLoad={(...args) => console.log("onceLoad", args)}
-    >
-      <MapLayer
-        id={id + "-fill"}
-        source={id}
-        type="fill"
-        paint={{
-          "fill-color": "#00b0f0",
-          "fill-opacity": 0.5,
+    <div>
+      <button
+        onClick={() => {
+          if (currentGeoIdx) {
+            return setCurrentGeoIdx(0);
+          }
+          setCurrentGeoIdx(1);
         }}
-        onClick={zoomToBounds(geoJson as GeoJSON.Feature)}
-        onLoad={zoomToBounds(geoJson as GeoJSON.Feature)}
       >
-        <MapSource
-          id={id}
-          type="geojson"
-          data={geoJson as GeoJSON.Feature}
-          generateId
-        />
-      </MapLayer>
-    </Map>
+        Change Area
+      </button>
+      <Map
+        accessToken={accesToken}
+        style={{
+          height: "calc(100vh - 35px)",
+          width: "100%",
+        }}
+        defaultCenter={centerCoorindates}
+        onMove={handleMove}
+        onceLoad={(...args) => console.log("onceLoad", args)}
+      >
+        <MapMarker lngLat={centerCoorindates} />
+        <MapLayer
+          id={id + "-fill"}
+          source={id}
+          type="fill"
+          paint={{
+            "fill-color": "#00b0f0",
+            "fill-opacity": 0.5,
+          }}
+          onClick={zoomToBounds(
+            geoJson.features[currentGeoIdx] as GeoJSON.Feature
+          )}
+          onLoad={zoomToBounds(
+            geoJson.features[currentGeoIdx] as GeoJSON.Feature
+          )}
+        >
+          <MapSource
+            id={id}
+            type="geojson"
+            data={geoJson.features[currentGeoIdx] as GeoJSON.Feature}
+            generateId
+          />
+        </MapLayer>
+      </Map>
+    </div>
   );
 };

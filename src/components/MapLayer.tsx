@@ -17,41 +17,40 @@ export const MapLayer: React.FC<MapLayerProps> = props => {
   const [onHandlers, onceHandlers, layer] = useMemo(() => pickHandlers(rest), [
     rest,
   ]);
+  // layer properties to trigger an effect
+  // https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/
+  // @ts-ignore
+  const { type, paint } = layer;
 
   useMapboxUIEffect(
     ({ map, mapbox }) => {
+      const exists = map.getLayer(id);
+      if (exists) return;
       map.addLayer({
         id,
         ...layer,
       });
 
-      const onListeners = createListeners(
+      const listenerCtx = {
         props,
-        onHandlers,
-        {
-          map,
-          mapbox,
-        },
-        "on",
-        id
-      );
+        map,
+        mapbox,
+      };
+      const onListeners = createListeners(onHandlers, map, listenerCtx, {
+        listenType: "on",
+        layerId: id,
+      });
 
-      const onceListeners = createListeners(
-        props,
-        onceHandlers,
-        {
-          map,
-          mapbox,
-        },
-        "once",
-        id
-      );
+      const onceListeners = createListeners(onceHandlers, map, listenerCtx, {
+        listenType: "once",
+        layerId: id,
+      });
 
       onListeners.addListeners();
       onceListeners.addListeners();
 
       if (onLoad) {
-        onLoad(props, { map, mapbox });
+        onLoad({ map, mapbox, props });
       }
 
       return () => {
@@ -59,7 +58,7 @@ export const MapLayer: React.FC<MapLayerProps> = props => {
         onceListeners.removeListeners();
       };
     },
-    [id, onLoad]
+    [id, onLoad, type, paint]
   );
 
   if (!children) return null;
