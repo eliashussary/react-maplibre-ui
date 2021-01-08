@@ -10,7 +10,7 @@ type BaseMapMarkerProps = {
   lngLat: LngLatLike;
 } & MapboxGL.MarkerOptions;
 
-type MapMarkerProps = Partial<OnMapEventHandlers<BaseMapMarkerProps>> &
+export type MapMarkerProps = Partial<OnMapEventHandlers<BaseMapMarkerProps>> &
   BaseMapMarkerProps;
 
 export const MapMarker: React.FC<MapMarkerProps> = props => {
