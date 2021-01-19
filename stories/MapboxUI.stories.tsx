@@ -7,6 +7,7 @@ import geoJson from "./geo.json";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useCallback, useState } from "@storybook/addons";
 import debounce from "lodash/debounce";
+import range from "lodash/range";
 
 const accesToken = process.env.MAPBOX_ACCESS_TOKEN;
 
@@ -60,6 +61,7 @@ const zoomToBounds = (geojson: GeoJSON.Feature) => ({ map }) => {
     [maxLng, minLat],
   ]);
 };
+
 export const WithGeoJson = () => {
   const [currentGeoIdx, setCurrentGeoIdx] = useState(0);
   const [moveState, setMoveState] = useState(null);
@@ -70,6 +72,8 @@ export const WithGeoJson = () => {
     }, 500),
     [setMoveState]
   );
+
+  const [hovered, setHovered] = useState(null);
 
   const id = "id" + currentGeoIdx;
   return (
@@ -84,6 +88,12 @@ export const WithGeoJson = () => {
       >
         Change Area
       </button>
+      <div
+        onMouseEnter={() => setHovered(1)}
+        onMouseLeave={() => setHovered(0)}
+      >
+        Hover Me
+      </div>
       <Map
         accessToken={accesToken}
         style={{
@@ -94,7 +104,7 @@ export const WithGeoJson = () => {
         onMove={handleMove}
         onceLoad={(...args) => console.log("onceLoad", args)}
       >
-        <MapMarker lngLat={centerCoorindates} />
+        {hovered && <MapMarker lngLat={centerCoorindates}>My marker</MapMarker>}
         <MapLayer
           id={id + "-fill"}
           source={id}

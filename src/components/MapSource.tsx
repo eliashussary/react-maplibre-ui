@@ -15,6 +15,7 @@ export const MapSource: React.FC<SourceProps> = props => {
   // https://docs.mapbox.com/mapbox-gl-js/style-spec/sources/
   // @ts-ignore
   const { type, data, tiles, url, urls, coordinates } = source;
+
   useMapboxUIEffect(
     ({ map, mapbox }) => {
       map.addSource(id, source);
@@ -33,7 +34,17 @@ export const MapSource: React.FC<SourceProps> = props => {
         map.removeSource(id);
       };
     },
-    [id, onLoad, type, data, tiles, url, urls, coordinates]
+    [id, onLoad]
+  );
+
+  useMapboxUIEffect(
+    ({ map }) => {
+      const src = map.getSource(id) as mapboxgl.GeoJSONSource;
+      // @ts-ignore
+      if (!src?.setData) return;
+      src.setData(data);
+    },
+    [id, data]
   );
 
   if (!children) return null;
