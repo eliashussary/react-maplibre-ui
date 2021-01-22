@@ -31,6 +31,15 @@ export const MapLayer: React.FC<MapLayerProps> = props => {
         ...layer,
       });
 
+      if (onLoad) {
+        onLoad({ map, mapbox, props });
+      }
+    },
+    [id, onLoad, type, paint]
+  );
+
+  useMapboxUIEffect(
+    ({ map, mapbox }) => {
       const listenerCtx = {
         props,
         map,
@@ -48,17 +57,12 @@ export const MapLayer: React.FC<MapLayerProps> = props => {
 
       onListeners.addListeners();
       onceListeners.addListeners();
-
-      if (onLoad) {
-        onLoad({ map, mapbox, props });
-      }
-
       return () => {
         onListeners.removeListeners();
         onceListeners.removeListeners();
       };
     },
-    [id, onLoad, type, paint]
+    [id, onHandlers, onceHandlers]
   );
 
   if (!children) return null;

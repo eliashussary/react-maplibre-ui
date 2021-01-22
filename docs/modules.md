@@ -56,7 +56,7 @@ Name |
 ------ |
 `P` |
 
-Defined in: [types.ts:14](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L14)
+Defined in: [types.ts:14](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L14)
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 Ƭ **LayerEvents**: keyof MapLayerEventType
 
-Defined in: [types.ts:18](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L18)
+Defined in: [types.ts:18](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L18)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 Ƭ **MapEvents**: keyof MapEventType
 
-Defined in: [types.ts:25](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L25)
+Defined in: [types.ts:25](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L25)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 Ƭ **MapLayerProps**: AnyLayer & *Partial*<[*OnLayerEventHandlers*](modules.md#onlayereventhandlers)<AnyLayer\>\> & { `onLoad?`: [*MapboxLayerEventHandler*](modules.md#mapboxlayereventhandler)<AnyLayer, *any*\>  }
 
-Defined in: [components/MapLayer.tsx:9](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/MapLayer.tsx#L9)
+Defined in: [components/MapLayer.tsx:9](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/MapLayer.tsx#L9)
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 Ƭ **MapMarkerProps**: *Partial*<[*OnMapEventHandlers*](modules.md#onmapeventhandlers)<BaseMapMarkerProps\>\> & BaseMapMarkerProps
 
-Defined in: [components/MapMarker.tsx:13](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/MapMarker.tsx#L13)
+Defined in: [components/MapMarker.tsx:13](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/MapMarker.tsx#L13)
 
 ___
 
@@ -103,7 +103,7 @@ Name | Type |
 `P` | - |
 `T` | [*MapEvents*](modules.md#mapevents) |
 
-Defined in: [types.ts:27](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L27)
+Defined in: [types.ts:27](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L27)
 
 ___
 
@@ -117,7 +117,7 @@ Name | Type |
 ------ | ------ |
 `T` | [*MapEvents*](modules.md#mapevents) |
 
-Defined in: [types.ts:26](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L26)
+Defined in: [types.ts:26](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L26)
 
 ___
 
@@ -132,7 +132,7 @@ Name | Type |
 `P` | - |
 `T` | [*LayerEvents*](modules.md#layerevents) |
 
-Defined in: [types.ts:20](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L20)
+Defined in: [types.ts:20](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L20)
 
 ___
 
@@ -146,7 +146,7 @@ Name | Type |
 ------ | ------ |
 `T` | [*LayerEvents*](modules.md#layerevents) |
 
-Defined in: [types.ts:19](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L19)
+Defined in: [types.ts:19](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L19)
 
 ___
 
@@ -161,7 +161,7 @@ Name | Type |
 `map` | MapboxGL.Map \| *null* |
 `mapbox` | *typeof* MapboxGL \| *null* |
 
-Defined in: [types.ts:8](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L8)
+Defined in: [types.ts:8](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L8)
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 Ƭ **MapboxUIProps**: *Partial*<[*OnMapEventHandlers*](modules.md#onmapeventhandlers)<BaseMapboxUIProps\>\> & BaseMapboxUIProps
 
-Defined in: [components/Map.tsx:40](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/Map.tsx#L40)
+Defined in: [components/Map.tsx:40](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/Map.tsx#L40)
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 Ƭ **NonNullMapboxUICtx**: { [P in keyof MapboxUICtx]: Exclude<MapboxUICtx[P], null\>}
 
-Defined in: [types.ts:4](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L4)
+Defined in: [types.ts:4](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L4)
 
 ___
 
@@ -191,7 +191,7 @@ Name |
 ------ |
 `P` |
 
-Defined in: [types.ts:54](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L54)
+Defined in: [types.ts:54](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L54)
 
 ___
 
@@ -199,7 +199,7 @@ ___
 
 Ƭ **OnEventHandlerRaw**: [*MapboxEventHandlerRaw*](modules.md#mapboxeventhandlerraw)<*any*\> \| [*MapboxLayerEventHandlerRaw*](modules.md#mapboxlayereventhandlerraw)<*any*\>
 
-Defined in: [types.ts:53](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L53)
+Defined in: [types.ts:53](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L53)
 
 ___
 
@@ -213,7 +213,7 @@ Name |
 ------ |
 `P` |
 
-Defined in: [types.ts:52](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L52)
+Defined in: [types.ts:52](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L52)
 
 ___
 
@@ -227,7 +227,7 @@ Name | Type |
 ------ | ------ |
 `T` | *string* |
 
-Defined in: [types.ts:33](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L33)
+Defined in: [types.ts:33](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L33)
 
 ___
 
@@ -241,7 +241,7 @@ Name |
 ------ |
 `P` |
 
-Defined in: [types.ts:36](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L36)
+Defined in: [types.ts:36](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L36)
 
 ___
 
@@ -255,7 +255,7 @@ Name | Type |
 ------ | ------ |
 `T` | *string* |
 
-Defined in: [types.ts:42](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L42)
+Defined in: [types.ts:42](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L42)
 
 ___
 
@@ -269,7 +269,7 @@ Name |
 ------ |
 `P` |
 
-Defined in: [types.ts:46](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L46)
+Defined in: [types.ts:46](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L46)
 
 ___
 
@@ -283,7 +283,7 @@ Name | Type |
 ------ | ------ |
 `T` | *string* |
 
-Defined in: [types.ts:34](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L34)
+Defined in: [types.ts:34](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L34)
 
 ___
 
@@ -297,7 +297,7 @@ Name | Type |
 ------ | ------ |
 `T` | *string* |
 
-Defined in: [types.ts:43](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/types.ts#L43)
+Defined in: [types.ts:43](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/types.ts#L43)
 
 ___
 
@@ -305,7 +305,7 @@ ___
 
 Ƭ **SourceProps**: AnySourceData & { `id`: *string* ; `onLoad?`: [*MapboxLayerEventHandler*](modules.md#mapboxlayereventhandler)<[*SourceProps*](modules.md#sourceprops), *any*\>  }
 
-Defined in: [components/MapSource.tsx:6](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/MapSource.tsx#L6)
+Defined in: [components/MapSource.tsx:6](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/MapSource.tsx#L6)
 
 ## Variables
 
@@ -313,7 +313,7 @@ Defined in: [components/MapSource.tsx:6](https://github.com/eliashussary/react-m
 
 • `Const` **DEFAULT\_MAP\_STYLE**: *mapbox://styles/mapbox/light-v10*= "mapbox://styles/mapbox/light-v10"
 
-Defined in: [components/Map.tsx:43](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/Map.tsx#L43)
+Defined in: [components/Map.tsx:43](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/Map.tsx#L43)
 
 ___
 
@@ -321,7 +321,7 @@ ___
 
 • `Const` **DEFAULT\_MAP\_ZOOM**: *10*= 10
 
-Defined in: [components/Map.tsx:44](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/Map.tsx#L44)
+Defined in: [components/Map.tsx:44](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/Map.tsx#L44)
 
 ___
 
@@ -329,7 +329,7 @@ ___
 
 • `Const` **Map**: *React.FC*<[*MapboxUIProps*](modules.md#mapboxuiprops)\>
 
-Defined in: [components/Map.tsx:46](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/Map.tsx#L46)
+Defined in: [components/Map.tsx:46](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/Map.tsx#L46)
 
 ___
 
@@ -337,7 +337,7 @@ ___
 
 • `Const` **MapCtx**: *Context*<[*MapboxUICtx*](modules.md#mapboxuictx)\>
 
-Defined in: [components/Map.tsx:7](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/Map.tsx#L7)
+Defined in: [components/Map.tsx:7](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/Map.tsx#L7)
 
 ___
 
@@ -345,7 +345,7 @@ ___
 
 • `Const` **MapLayer**: *React.FC*<[*MapLayerProps*](modules.md#maplayerprops)\>
 
-Defined in: [components/MapLayer.tsx:14](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/MapLayer.tsx#L14)
+Defined in: [components/MapLayer.tsx:14](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/MapLayer.tsx#L14)
 
 ___
 
@@ -353,7 +353,7 @@ ___
 
 • `Const` **MapMarker**: *React.FC*<[*MapMarkerProps*](modules.md#mapmarkerprops)\>
 
-Defined in: [components/MapMarker.tsx:16](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/MapMarker.tsx#L16)
+Defined in: [components/MapMarker.tsx:16](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/MapMarker.tsx#L16)
 
 ___
 
@@ -361,7 +361,7 @@ ___
 
 • `Const` **MapSource**: *React.FC*<[*SourceProps*](modules.md#sourceprops)\>
 
-Defined in: [components/MapSource.tsx:11](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/components/MapSource.tsx#L11)
+Defined in: [components/MapSource.tsx:11](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/components/MapSource.tsx#L11)
 
 ## Functions
 
@@ -380,7 +380,7 @@ const { map,mapbox } = useMapboxUI()
 
 **Returns:** [*MapboxUICtx*](modules.md#mapboxuictx)
 
-Defined in: [hooks.ts:14](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/hooks.ts#L14)
+Defined in: [hooks.ts:14](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/hooks.ts#L14)
 
 ___
 
@@ -415,4 +415,4 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [hooks.ts:38](https://github.com/eliashussary/react-mapbox-ui/blob/f7c431a/src/hooks.ts#L38)
+Defined in: [hooks.ts:38](https://github.com/eliashussary/react-mapbox-ui/blob/25fc309/src/hooks.ts#L38)

@@ -55,6 +55,7 @@ export const Map: React.FC<MapboxUIProps> = props => {
     id,
     ...rest
   } = props;
+
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const [mapInstance, setMapInstance] = useState<MapboxGL.Map | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -70,6 +71,18 @@ export const Map: React.FC<MapboxUIProps> = props => {
       center: defaultCenter,
       zoom: defaultZoom,
     });
+
+    const onLoad = () => setIsLoaded(true);
+    map.on("load", onLoad);
+    setMapInstance(map);
+    return () => {
+      map.off("load", onLoad);
+    };
+  }, [mapContainer.current]);
+
+  useEffect(() => {
+    const map = mapInstance;
+    if (!map) return;
 
     const listenerCtx = {
       props,
@@ -87,19 +100,19 @@ export const Map: React.FC<MapboxUIProps> = props => {
 
     onListeners.addListeners();
     onceListeners.addListeners();
-    const onLoad = () => setIsLoaded(true);
-    map.on("load", onLoad);
-    setMapInstance(map);
     return () => {
       onListeners.removeListeners();
       onceListeners.removeListeners();
-      map.on("load", onLoad);
     };
-  }, [mapContainer.current]);
+  }, [mapInstance, onHandlers, onceHandlers]);
+
+  const ctxValue = useMemo(() => {
+    return { map: mapInstance, mapbox: MapboxGL };
+  }, [mapInstance, MapboxGL]);
 
   return (
     <React.Fragment>
-      <MapCtx.Provider value={{ map: mapInstance, mapbox: MapboxGL }}>
+      <MapCtx.Provider value={ctxValue}>
         <div
           id={id}
           className={className}

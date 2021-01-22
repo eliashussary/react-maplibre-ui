@@ -37,7 +37,30 @@ export const WithMarker = () => {
         onClick={(...args) => console.log("marker", args)}
       />
 
-      <MapMarker
+      <MapLayer
+        id="foo"
+        type="circle"
+        source={"circle"}
+        paint={{
+          "circle-color": "black",
+          "circle-radius": 10,
+        }}
+        onClick={(ctx, e) => console.log(ctx, e)}
+      >
+        <MapSource
+          id="circle"
+          type="geojson"
+          data={{
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [-79.35365075220747, 43.675620889019754],
+            },
+          }}
+        />
+      </MapLayer>
+
+      {/* <MapMarker
         lngLat={[-79.35365075220747, 43.675620889019754]}
         onClick={(...args) => console.log("marker", args)}
       >
@@ -49,7 +72,7 @@ export const WithMarker = () => {
             borderRadius: "50%",
           }}
         />
-      </MapMarker>
+      </MapMarker> */}
     </Map>
   );
 };
