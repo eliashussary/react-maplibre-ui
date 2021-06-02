@@ -37,26 +37,26 @@
     "trailingComma": "es5"
   },
   "repository": {
-    "url": "https://github.com/eliashussary/react-mapbox-ui"
+    "url": "https://github.com/eliashussary/react-maplibre-ui"
   },
-  "name": "react-mapbox-ui",
+  "name": "react-maplibre-ui",
   "author": "Elias Hussary",
-  "module": "dist/react-mapbox-ui.esm.js",
+  "module": "dist/react-maplibre-ui.esm.js",
   "size-limit": [
     {
-      "path": "dist/react-mapbox-ui.cjs.production.min.js",
+      "path": "dist/react-maplibre-ui.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/react-mapbox-ui.esm.js",
+      "path": "dist/react-maplibre-ui.esm.js",
       "limit": "10 KB"
     }
   ],
   "keywords": [
     "react",
-    "mapbox",
+    "maplibre",
     "ui",
-    "react-mapbox-ui"
+    "react-maplibre-ui"
   ],
   "devDependencies": {
     "@babel/core": "^7.12.10",
