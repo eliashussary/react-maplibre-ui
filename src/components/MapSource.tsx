@@ -1,11 +1,11 @@
-import { AnySourceData } from "mapbox-gl";
+import { AnySourceData } from "maplibre-gl";
 import React from "react";
-import { useMapboxUIEffect } from "../hooks";
-import { MapboxLayerEventHandler } from "../types";
+import { useMaplibreUIEffect } from "../hooks";
+import { MaplibreLayerEventHandler } from "../types";
 
 export type SourceProps = AnySourceData & {
   id: string;
-  onLoad?: MapboxLayerEventHandler<SourceProps, any>;
+  onLoad?: MaplibreLayerEventHandler<SourceProps, any>;
 };
 
 export const MapSource: React.FC<SourceProps> = props => {
@@ -16,7 +16,7 @@ export const MapSource: React.FC<SourceProps> = props => {
   // @ts-ignore
   const { type, data, tiles, url, urls, coordinates } = source;
 
-  useMapboxUIEffect(
+  useMaplibreUIEffect(
     ({ map, mapbox }) => {
       map.addSource(id, source);
 
@@ -37,7 +37,7 @@ export const MapSource: React.FC<SourceProps> = props => {
     [id, onLoad]
   );
 
-  useMapboxUIEffect(
+  useMaplibreUIEffect(
     ({ map }) => {
       const src = map.getSource(id) as mapboxgl.GeoJSONSource;
       // @ts-ignore

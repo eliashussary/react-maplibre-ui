@@ -1,6 +1,8 @@
-# react-mapbox-ui
+# react-maplibre-ui
 
-MapboxUI provides a minimal layer of abstraction for composing mapbox-gl UI's in an idiomatic React way.
+> This was a fork of [`react-mapbox-ui`](https://github.com/eliashussary/react-mapbox-ui)
+
+MaplibreUI provides a minimal layer of abstraction for composing maplibre-gl UI's in an idiomatic React way.
 
 As a base, this library provides you with the following components:
 
@@ -12,20 +14,20 @@ As a base, this library provides you with the following components:
 ## Install
 
 ```sh
-yarn add react-mapbox-ui
+yarn add react-maplibre-ui
 # or
-npm i react-mapbox-ui
+npm i react-maplibre-ui
 ```
 
 ## Usage
 
 See [TypeDocs](/docs/modules.md).
 
-Composing your own MapboxUI components.
+Composing your own MaplibreUI components.
 
 ```tsx
-import { Map, MapMarker } from "react-mapbox-ui";
-import "mapbox-gl/dist/mapbox-gl.css";
+import { Map, MapMarker } from "react-maplibre-ui";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 const accessToken = "your access token";
 const centerCoorindates: LngLatLike = [-79.347015, 43.65107]; // Toronto
@@ -35,7 +37,11 @@ const geoJson = {};
 const App = () => {
   return (
     <Map
-      accessToken={accessToken}
+      // you can use MapboxGL with an accesstoken
+      // accessToken={accessToken}
+
+      // maptiler usage
+      mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${accessToken}`}
       style={{
         height: "100vh",
         width: "100%",

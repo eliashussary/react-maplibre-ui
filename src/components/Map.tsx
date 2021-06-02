@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
-import MapboxGL, { LngLatLike } from "mapbox-gl";
-import { MapboxUICtx, OnMapEventHandlers } from "../types";
+import MaplibreGL, { LngLatLike } from "maplibre-gl";
+import { MaplibreUICtx, OnMapEventHandlers } from "../types";
 import { pickHandlers } from "../util/pickHandlers";
 import { createListeners } from "../util/createListeners";
 
-export const MapCtx = React.createContext<MapboxUICtx>({
+export const MapCtx = React.createContext<MaplibreUICtx>({
   map: null,
-  mapbox: MapboxGL,
+  mapbox: MaplibreGL,
 });
 
-type BaseMapboxUIProps = {
+type BaseMaplibreUIProps = {
   /**
    * accessToken from mapbox, see https://docs.mapbox.com/help/how-mapbox-works/access-tokens/
    */
-  accessToken: string;
+  accessToken?: string;
   /**
    * defaultCenter as [longitude, latitude]
    */
@@ -37,15 +37,15 @@ type BaseMapboxUIProps = {
   id?: string;
 };
 
-export type MapboxUIProps = Partial<OnMapEventHandlers<BaseMapboxUIProps>> &
-  BaseMapboxUIProps;
+export type MaplibreUIProps = Partial<OnMapEventHandlers<BaseMaplibreUIProps>> &
+  BaseMaplibreUIProps;
 
 export const DEFAULT_MAP_STYLE = "mapbox://styles/mapbox/light-v10";
 export const DEFAULT_MAP_ZOOM = 10;
 
-export const Map: React.FC<MapboxUIProps> = props => {
+export const Map: React.FC<MaplibreUIProps> = props => {
   const {
-    accessToken,
+    // accessToken,
     mapStyle = DEFAULT_MAP_STYLE,
     children,
     defaultCenter,
@@ -57,15 +57,15 @@ export const Map: React.FC<MapboxUIProps> = props => {
   } = props;
 
   const mapContainer = useRef<HTMLDivElement | null>(null);
-  const [mapInstance, setMapInstance] = useState<MapboxGL.Map | null>(null);
+  const [mapInstance, setMapInstance] = useState<MaplibreGL.Map | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [onHandlers, onceHandlers] = useMemo(() => pickHandlers(rest), [rest]);
 
   useEffect(() => {
     if (!mapContainer.current) return;
-    const map = new MapboxGL.Map({
-      accessToken,
+    const map = new MaplibreGL.Map({
+      // accessToken,
       container: mapContainer.current,
       style: mapStyle,
       center: defaultCenter,
@@ -87,7 +87,7 @@ export const Map: React.FC<MapboxUIProps> = props => {
     const listenerCtx = {
       props,
       map,
-      mapbox: MapboxGL,
+      mapbox: MaplibreGL,
     };
 
     const onListeners = createListeners(onHandlers, map, listenerCtx, {
@@ -107,8 +107,8 @@ export const Map: React.FC<MapboxUIProps> = props => {
   }, [mapInstance, onHandlers, onceHandlers]);
 
   const ctxValue = useMemo(() => {
-    return { map: mapInstance, mapbox: MapboxGL };
-  }, [mapInstance, MapboxGL]);
+    return { map: mapInstance, mapbox: MaplibreGL };
+  }, [mapInstance, MaplibreGL]);
 
   return (
     <React.Fragment>

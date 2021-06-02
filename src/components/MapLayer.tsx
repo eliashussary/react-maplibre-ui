@@ -1,14 +1,14 @@
-import { AnyLayer } from "mapbox-gl";
+import { AnyLayer } from "maplibre-gl";
 import React from "react";
 import { useMemo } from "react";
-import { useMapboxUIEffect } from "../hooks";
+import { useMaplibreUIEffect } from "../hooks";
 import { pickHandlers } from "../util/pickHandlers";
 import { createListeners } from "../util/createListeners";
-import { OnLayerEventHandlers, MapboxLayerEventHandler } from "../types";
+import { OnLayerEventHandlers, MaplibreLayerEventHandler } from "../types";
 
 export type MapLayerProps = AnyLayer &
   Partial<OnLayerEventHandlers<AnyLayer>> & {
-    onLoad?: MapboxLayerEventHandler<AnyLayer, any>;
+    onLoad?: MaplibreLayerEventHandler<AnyLayer, any>;
   };
 
 export const MapLayer: React.FC<MapLayerProps> = props => {
@@ -22,7 +22,7 @@ export const MapLayer: React.FC<MapLayerProps> = props => {
   // @ts-ignore
   const { type, paint } = layer;
 
-  useMapboxUIEffect(
+  useMaplibreUIEffect(
     ({ map, mapbox }) => {
       const exists = map.getLayer(id);
       if (exists) return;
@@ -38,7 +38,7 @@ export const MapLayer: React.FC<MapLayerProps> = props => {
     [id, onLoad, type, paint]
   );
 
-  useMapboxUIEffect(
+  useMaplibreUIEffect(
     ({ map, mapbox }) => {
       const listenerCtx = {
         props,

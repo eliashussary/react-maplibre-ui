@@ -1,29 +1,29 @@
 import { useContext, useEffect } from "react";
 import { MapCtx } from "./components/Map";
-import { NonNullMapboxUICtx } from "./types";
+import { NonNullMaplibreUICtx } from "./types";
 
 /**
- * useMapboxUI is a simple wrapper around `useContext(MapCtx)`
+ * useMaplibreUI is a simple wrapper around `useContext(MapCtx)`
  * it provides the Map instance and mapbox module
  * this hook does not ensure the context proivde was mounted
  * @example
  * ```
- * const { map,mapbox } = useMapboxUI()
+ * const { map,mapbox } = useMaplibreUI()
  * ```
  */
-export const useMapboxUI = () => useContext(MapCtx);
+export const useMaplibreUI = () => useContext(MapCtx);
 
-type MapboxUIEffectCallback = (
-  mapCtx: NonNullMapboxUICtx
+type MaplibreUIEffectCallback = (
+  mapCtx: NonNullMaplibreUICtx
 ) => void | (() => void);
 
 /**
- * useMapboxUIEffect wraps useMapboxUI in a useEffect
+ * useMaplibreUIEffect wraps useMaplibreUI in a useEffect
  * this hook ensures the map instance is created
  * and the context provider was mounted
  * @example
  * ```
- * useMapboxUIEffect(
+ * useMaplibreUIEffect(
  *  ({ map, mapbox }) => {
  *     const marker = new mapbox.Marker().setLngLat(coordinates).addTo(map);
  *
@@ -35,11 +35,11 @@ type MapboxUIEffectCallback = (
  * );
  * ```
  */
-export const useMapboxUIEffect = (
-  effect: MapboxUIEffectCallback,
+export const useMaplibreUIEffect = (
+  effect: MaplibreUIEffectCallback,
   deps: any[]
 ) => {
-  const { map, mapbox } = useMapboxUI();
+  const { map, mapbox } = useMaplibreUI();
   useEffect(() => {
     if (!map || !mapbox) return;
     const rt = effect({ map: map, mapbox: mapbox });

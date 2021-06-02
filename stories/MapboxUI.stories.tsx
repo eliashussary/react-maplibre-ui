@@ -1,15 +1,14 @@
 import React from "react";
 import { Meta } from "@storybook/react";
 import { Map, MapMarker, MapLayer, MapSource } from "../src";
-import { LngLatLike } from "mapbox-gl";
+import { LngLatLike } from "maplibre-gl";
 import bbox from "@turf/bbox";
 import geoJson from "./geo.json";
-import "mapbox-gl/dist/mapbox-gl.css";
+import "maplibre-gl/dist/maplibre-gl.css";
 import { useCallback, useState } from "@storybook/addons";
 import debounce from "lodash/debounce";
-import range from "lodash/range";
 
-const accesToken = process.env.MAPBOX_ACCESS_TOKEN;
+const accessToken = process.env.MAPTILER_API_KEY;
 
 const meta: Meta = {
   title: "MapboxUI",
@@ -23,7 +22,7 @@ const centerCoorindates: LngLatLike = [-79.347015, 43.65107];
 export const WithMarker = () => {
   return (
     <Map
-      accessToken={accesToken}
+      mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${accessToken}`}
       style={{
         height: "calc(100vh - 35px)",
         width: "100%",
@@ -56,6 +55,7 @@ export const WithMarker = () => {
               type: "Point",
               coordinates: [-79.35365075220747, 43.675620889019754],
             },
+            properties: {},
           }}
         />
       </MapLayer>
@@ -118,7 +118,7 @@ export const WithGeoJson = () => {
         Hover Me
       </div>
       <Map
-        accessToken={accesToken}
+        mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${accessToken}`}
         style={{
           height: "calc(100vh - 35px)",
           width: "100%",
