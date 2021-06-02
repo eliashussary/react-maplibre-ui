@@ -78,6 +78,7 @@ export const Map: React.FC<MaplibreUIProps> = props => {
     return () => {
       map.off("load", onLoad);
     };
+    // eslint-disable-next-line
   }, [mapContainer.current]);
 
   useEffect(() => {
@@ -104,6 +105,7 @@ export const Map: React.FC<MaplibreUIProps> = props => {
       onListeners.removeListeners();
       onceListeners.removeListeners();
     };
+    // eslint-disable-next-line
   }, [mapInstance, onHandlers, onceHandlers]);
 
   const ctxValue = useMemo(() => {

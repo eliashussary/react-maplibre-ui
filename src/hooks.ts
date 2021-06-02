@@ -44,5 +44,6 @@ export const useMaplibreUIEffect = (
     if (!map || !mapbox) return;
     const rt = effect({ map: map, mapbox: mapbox });
     return rt;
+    // eslint-disable-next-line
   }, [map, mapbox, ...deps]);
 };

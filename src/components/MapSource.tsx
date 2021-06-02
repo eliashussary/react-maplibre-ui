@@ -13,8 +13,7 @@ export const MapSource: React.FC<SourceProps> = props => {
 
   // possible source attributes we need to track
   // https://docs.mapbox.com/mapbox-gl-js/style-spec/sources/
-  // @ts-ignore
-  const { type, data, tiles, url, urls, coordinates } = source;
+  const { data } = source as { data: any };
 
   useMaplibreUIEffect(
     ({ map, mapbox }) => {
