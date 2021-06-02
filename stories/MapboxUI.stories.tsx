@@ -8,6 +8,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { useCallback, useState } from "@storybook/addons";
 import debounce from "lodash/debounce";
 
+const mapStyle = process.env.MAPTILER_STYLE;
 const accessToken = process.env.MAPTILER_API_KEY;
 
 const meta: Meta = {
@@ -22,7 +23,7 @@ const centerCoorindates: LngLatLike = [-79.347015, 43.65107];
 export const WithMarker = () => {
   return (
     <Map
-      mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${accessToken}`}
+      mapStyle={`${mapStyle}?key=${accessToken}`}
       style={{
         height: "calc(100vh - 35px)",
         width: "100%",
@@ -118,7 +119,7 @@ export const WithGeoJson = () => {
         Hover Me
       </div>
       <Map
-        mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${accessToken}`}
+        mapStyle={`${mapStyle}?key=${accessToken}`}
         style={{
           height: "calc(100vh - 35px)",
           width: "100%",
