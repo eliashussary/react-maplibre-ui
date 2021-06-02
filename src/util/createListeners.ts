@@ -5,6 +5,7 @@ import {
   OnEventHandler,
   EventHandlerContext,
 } from "../types";
+import { Map, Marker } from "maplibre-gl";
 
 interface ListenerOptions {
   listenType: "on" | "once";
@@ -13,7 +14,7 @@ interface ListenerOptions {
 
 export function createListeners<P>(
   onHandlers: OnEventListener<P>,
-  target: maplibregl.Map | maplibregl.Marker,
+  target: Map | Marker,
   ctx: EventHandlerContext<P>,
   opts: ListenerOptions = { listenType: "on" }
 ) {
@@ -39,11 +40,7 @@ export function createListeners<P>(
   const addListeners = () => {
     handlers.forEach(([type, handler]) => {
       if (opts.layerId) {
-        return (target as maplibregl.Map)[listenType](
-          type,
-          opts.layerId,
-          handler
-        );
+        return (target as Map)[listenType](type, opts.layerId, handler);
       }
       return target[listenType](type, handler);
     });
@@ -52,7 +49,7 @@ export function createListeners<P>(
   const removeListeners = () => {
     handlers.forEach(([type, handler]) => {
       if (layerId) {
-        return (target as maplibregl.Map).off(type, layerId, handler);
+        return (target as Map).off(type, layerId, handler);
       }
       return target.off(type, handler);
     });
