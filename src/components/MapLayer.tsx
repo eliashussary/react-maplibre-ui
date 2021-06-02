@@ -18,12 +18,12 @@ export const MapLayer: React.FC<MapLayerProps> = props => {
     rest,
   ]);
   // layer properties to trigger an effect
-  // https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/
+  // https://docs.maplibre.com/maplibre-gl-js/style-spec/layers/
   // @ts-ignore
   const { type, paint } = layer;
 
   useMaplibreUIEffect(
-    ({ map, mapbox }) => {
+    ({ map, maplibre }) => {
       const exists = map.getLayer(id);
       if (exists) return;
       map.addLayer({
@@ -32,18 +32,18 @@ export const MapLayer: React.FC<MapLayerProps> = props => {
       });
 
       if (onLoad) {
-        onLoad({ map, mapbox, props });
+        onLoad({ map, maplibre, props });
       }
     },
     [id, onLoad, type, paint]
   );
 
   useMaplibreUIEffect(
-    ({ map, mapbox }) => {
+    ({ map, maplibre }) => {
       const listenerCtx = {
         props,
         map,
-        mapbox,
+        maplibre,
       };
       const onListeners = createListeners(onHandlers, map, listenerCtx, {
         listenType: "on",

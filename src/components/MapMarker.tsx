@@ -20,7 +20,7 @@ export const MapMarker: React.FC<MapMarkerProps> = props => {
   const [onHandlers, onceHandlers] = useMemo(() => pickHandlers(rest), [rest]);
 
   useMaplibreUIEffect(
-    ({ map, mapbox }) => {
+    ({ map, maplibre }) => {
       const markerOptions = { ...rest };
 
       if (children) {
@@ -31,14 +31,14 @@ export const MapMarker: React.FC<MapMarkerProps> = props => {
           el.current
         );
       }
-      const marker = new mapbox.Marker(markerOptions)
+      const marker = new maplibre.Marker(markerOptions)
         .setLngLat(lngLat)
         .addTo(map);
 
       const listenerCtx = {
         props,
         map,
-        mapbox,
+        maplibre,
       };
       const onListeners = createListeners(onHandlers, marker, listenerCtx, {
         listenType: "on",

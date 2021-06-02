@@ -4,11 +4,11 @@ import { NonNullMaplibreUICtx } from "./types";
 
 /**
  * useMaplibreUI is a simple wrapper around `useContext(MapCtx)`
- * it provides the Map instance and mapbox module
+ * it provides the Map instance and maplibre module
  * this hook does not ensure the context proivde was mounted
  * @example
  * ```
- * const { map,mapbox } = useMaplibreUI()
+ * const { map,maplibre } = useMaplibreUI()
  * ```
  */
 export const useMaplibreUI = () => useContext(MapCtx);
@@ -24,8 +24,8 @@ type MaplibreUIEffectCallback = (
  * @example
  * ```
  * useMaplibreUIEffect(
- *  ({ map, mapbox }) => {
- *     const marker = new mapbox.Marker().setLngLat(coordinates).addTo(map);
+ *  ({ map, maplibre }) => {
+ *     const marker = new maplibre.Marker().setLngLat(coordinates).addTo(map);
  *
  *     return () => {
  *       marker.remove();
@@ -39,11 +39,11 @@ export const useMaplibreUIEffect = (
   effect: MaplibreUIEffectCallback,
   deps: any[]
 ) => {
-  const { map, mapbox } = useMaplibreUI();
+  const { map, maplibre } = useMaplibreUI();
   useEffect(() => {
-    if (!map || !mapbox) return;
-    const rt = effect({ map: map, mapbox: mapbox });
+    if (!map || !maplibre) return;
+    const rt = effect({ map: map, maplibre: maplibre });
     return rt;
     // eslint-disable-next-line
-  }, [map, mapbox, ...deps]);
+  }, [map, maplibre, ...deps]);
 };

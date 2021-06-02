@@ -13,7 +13,7 @@ interface ListenerOptions {
 
 export function createListeners<P>(
   onHandlers: OnEventListener<P>,
-  target: mapboxgl.Map | mapboxgl.Marker,
+  target: maplibregl.Map | maplibregl.Marker,
   ctx: EventHandlerContext<P>,
   opts: ListenerOptions = { listenType: "on" }
 ) {
@@ -39,7 +39,7 @@ export function createListeners<P>(
   const addListeners = () => {
     handlers.forEach(([type, handler]) => {
       if (opts.layerId) {
-        return (target as mapboxgl.Map)[listenType](
+        return (target as maplibregl.Map)[listenType](
           type,
           opts.layerId,
           handler
@@ -52,7 +52,7 @@ export function createListeners<P>(
   const removeListeners = () => {
     handlers.forEach(([type, handler]) => {
       if (layerId) {
-        return (target as mapboxgl.Map).off(type, layerId, handler);
+        return (target as maplibregl.Map).off(type, layerId, handler);
       }
       return target.off(type, handler);
     });

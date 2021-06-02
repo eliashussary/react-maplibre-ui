@@ -6,12 +6,12 @@ import { createListeners } from "../util/createListeners";
 
 export const MapCtx = React.createContext<MaplibreUICtx>({
   map: null,
-  mapbox: MaplibreGL,
+  maplibre: MaplibreGL,
 });
 
 type BaseMaplibreUIProps = {
   /**
-   * accessToken from mapbox, see https://docs.mapbox.com/help/how-mapbox-works/access-tokens/
+   * accessToken from maplibre, see https://docs.maplibre.com/help/how-maplibre-works/access-tokens/
    */
   accessToken?: string;
   /**
@@ -19,7 +19,7 @@ type BaseMaplibreUIProps = {
    */
   defaultCenter: LngLatLike;
   /**
-   * mapbox styleUrl, see https://docs.mapbox.com/help/glossary/style-url/
+   * maplibre styleUrl, see https://docs.maplibre.com/help/glossary/style-url/
    */
   mapStyle?: string;
   defaultZoom?: number;
@@ -40,7 +40,7 @@ type BaseMaplibreUIProps = {
 export type MaplibreUIProps = Partial<OnMapEventHandlers<BaseMaplibreUIProps>> &
   BaseMaplibreUIProps;
 
-export const DEFAULT_MAP_STYLE = "mapbox://styles/mapbox/light-v10";
+export const DEFAULT_MAP_STYLE = "maplibre://styles/maplibre/light-v10";
 export const DEFAULT_MAP_ZOOM = 10;
 
 export const Map: React.FC<MaplibreUIProps> = props => {
@@ -88,7 +88,7 @@ export const Map: React.FC<MaplibreUIProps> = props => {
     const listenerCtx = {
       props,
       map,
-      mapbox: MaplibreGL,
+      maplibre: MaplibreGL,
     };
 
     const onListeners = createListeners(onHandlers, map, listenerCtx, {
@@ -109,7 +109,7 @@ export const Map: React.FC<MaplibreUIProps> = props => {
   }, [mapInstance, onHandlers, onceHandlers]);
 
   const ctxValue = useMemo(() => {
-    return { map: mapInstance, mapbox: MaplibreGL };
+    return { map: mapInstance, maplibre: MaplibreGL };
   }, [mapInstance]);
 
   return (

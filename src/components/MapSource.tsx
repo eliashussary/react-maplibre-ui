@@ -1,4 +1,4 @@
-import { AnySourceData } from "maplibre-gl";
+import { AnySourceData, GeoJSONSource } from "maplibre-gl";
 import React from "react";
 import { useMaplibreUIEffect } from "../hooks";
 import { MaplibreLayerEventHandler } from "../types";
@@ -12,15 +12,15 @@ export const MapSource: React.FC<SourceProps> = props => {
   const { id, onLoad, children = null, ...source } = props;
 
   // possible source attributes we need to track
-  // https://docs.mapbox.com/mapbox-gl-js/style-spec/sources/
+  // https://docs.maplibre.com/maplibre-gl-js/style-spec/sources/
   const { data } = source as { data: any };
 
   useMaplibreUIEffect(
-    ({ map, mapbox }) => {
+    ({ map, maplibre }) => {
       map.addSource(id, source);
 
       if (onLoad) {
-        onLoad({ map, mapbox, props });
+        onLoad({ map, maplibre, props });
       }
 
       return () => {
@@ -38,7 +38,7 @@ export const MapSource: React.FC<SourceProps> = props => {
 
   useMaplibreUIEffect(
     ({ map }) => {
-      const src = map.getSource(id) as mapboxgl.GeoJSONSource;
+      const src = map.getSource(id) as GeoJSONSource;
       // @ts-ignore
       if (!src?.setData) return;
       src.setData(data);

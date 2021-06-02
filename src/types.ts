@@ -6,7 +6,7 @@ export type NonNullMaplibreUICtx = {
 };
 
 export type MaplibreUICtx = {
-  mapbox: typeof MaplibreGL | null;
+  maplibre: typeof MaplibreGL | null;
   map: MaplibreGL.Map | null;
 };
 
