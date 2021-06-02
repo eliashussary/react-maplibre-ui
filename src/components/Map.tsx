@@ -110,7 +110,7 @@ export const Map: React.FC<MaplibreUIProps> = props => {
 
   const ctxValue = useMemo(() => {
     return { map: mapInstance, mapbox: MaplibreGL };
-  }, [mapInstance, MaplibreGL]);
+  }, [mapInstance]);
 
   return (
     <React.Fragment>

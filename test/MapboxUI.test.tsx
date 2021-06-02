@@ -1,4 +1,4 @@
-import { LngLatLike } from "mapbox-gl";
+import { LngLatLike } from "maplibre-gl";
 import React from "react";
 import ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
@@ -6,8 +6,8 @@ import {
   Map,
   DEFAULT_MAP_STYLE,
   DEFAULT_MAP_ZOOM,
-  useMapboxUI,
-  useMapboxUIEffect,
+  useMaplibreUI,
+  useMaplibreUIEffect,
 } from "../src";
 
 const mockConstructor = jest.fn();
@@ -16,7 +16,7 @@ const mockAddToMap = jest.fn();
 const mockRemove = jest.fn();
 const mockOnListener = jest.fn();
 
-jest.mock("mapbox-gl", () => {
+jest.mock("maplibre-gl", () => {
   return {
     Map: class {
       constructor(opts: any) {
@@ -48,7 +48,7 @@ const mockAccessToken = "mock-access-token";
 const mockCenter: LngLatLike = [-79.347015, 43.65107];
 
 let container: HTMLDivElement;
-describe("MapboxUI", () => {
+describe("MaplibreUI", () => {
   beforeEach(() => {
     container = document.createElement("div");
   });
@@ -75,13 +75,13 @@ describe("MapboxUI", () => {
     );
   });
 
-  it("provides context with useMapboxUI", () => {
-    let mapCtx, mapboxCtx: any;
+  it("provides context with useMaplibreUI", () => {
+    let mapCtx, maplibreCtx: any;
 
     const MockComponent = () => {
-      const { map, mapbox } = useMapboxUI();
+      const { map, maplibre } = useMaplibreUI();
       mapCtx = map;
-      mapboxCtx = mapbox;
+      maplibreCtx = maplibre;
       return null;
     };
     act(() => {
@@ -94,19 +94,19 @@ describe("MapboxUI", () => {
     });
 
     expect(mapCtx).toBeTruthy();
-    expect(mapboxCtx).toBeTruthy();
+    expect(maplibreCtx).toBeTruthy();
   });
 
-  it("provides context with useMapboxUIEffect and runs the effect", () => {
+  it("provides context with useMaplibreUIEffect and runs the effect", () => {
     let mapCtx;
 
     const Marker: React.FC<{
       coordinates: LngLatLike;
     }> = ({ coordinates }) => {
-      useMapboxUIEffect(
-        ({ map, mapbox }) => {
+      useMaplibreUIEffect(
+        ({ map, maplibre }) => {
           mapCtx = map;
-          const marker = new mapbox!.Marker()
+          const marker = new maplibre!.Marker()
             .setLngLat(coordinates)
             .addTo(map!);
 
